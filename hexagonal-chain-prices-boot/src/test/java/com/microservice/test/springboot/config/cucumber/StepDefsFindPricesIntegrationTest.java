@@ -14,7 +14,7 @@ public class StepDefsFindPricesIntegrationTest extends SpringIntegrationTest {
     private static final String URL = "http://localhost:8081/hexagonal-chain-prices/findPrice";
 
     @When("the user calls with product_id {int} and application_date {string}")
-    public void the_client_search_POST_200(int productId,String applicationDate) throws Throwable {
+    public void the_user_find_price_POST_200(int productId,String applicationDate) throws Throwable {
         JSONObject jsonObj = new JSONObject()
                 .put("application_date",applicationDate)
                 .put("product_id",String.valueOf(productId))
@@ -24,7 +24,7 @@ public class StepDefsFindPricesIntegrationTest extends SpringIntegrationTest {
 
 
     @Then("the user recive status_code {int} and brand_id {int} and product_id {int} and price_list {int} and start_date {string}")
-    public void the_client_receives_status_code(int statusCode,int brand,int product,int price,String start){
+    public void the_user_receives_response_status_code(int statusCode,int brand,int product,int price,String start){
         final Integer currentStatusCode = latestResponse.getStatusCodeValue();
 
         if(statusCode==200){
