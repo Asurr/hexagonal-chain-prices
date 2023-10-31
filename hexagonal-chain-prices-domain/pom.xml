@@ -8,12 +8,21 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>com.microservice.test</groupId>
     <artifactId>hexagonal-chain-prices-domain</artifactId>
+    <name>hexagonal-chain-prices-domai</name>
+    <description>spring-boot hexagonal microservice domain layer</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 </project>
