@@ -10,7 +10,7 @@ servers:
 
 paths:
   /hexagonal-chain-prices/findPrice:
-    get:
+    post:
       requestBody:
         description: find prices
         content:
