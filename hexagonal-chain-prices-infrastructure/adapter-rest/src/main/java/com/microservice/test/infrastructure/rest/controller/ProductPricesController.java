@@ -3,18 +3,17 @@ package com.microservice.test.infrastructure.rest.controller;
 import com.microservice.test.api.dto.v1.FindPriceRequestDTO;
 import com.microservice.test.api.dto.v1.FindPriceResponseDTO;
 import com.microservice.test.controller.v1.HexagonalChainPricesApi;
-import com.microservice.test.infrastructure.rest.exception.PriceNotFoundException;
+import com.microservice.test.domain.entity.FindPriceResponse;
+import com.microservice.test.domain.exception.PriceNotFoundException;
+import com.microservice.test.domain.usecase.FindPriceUseCase;
+import com.microservice.test.infrastructure.rest.mapper.FindPriceRequestMapper;
+import com.microservice.test.infrastructure.rest.mapper.FindPriceResponseMapper;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
-import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.context.annotation.Scope;
 
@@ -24,20 +23,23 @@ import org.springframework.context.annotation.Scope;
 @Slf4j
 public class ProductPricesController implements HexagonalChainPricesApi {
 
+    private final FindPriceUseCase findPriceUseCase;
+
+    private final FindPriceRequestMapper findPriceRequestMapper;
+
+    private final FindPriceResponseMapper findPriceResponseMapper;
+
     @Override
-    @Retry(name = "RetryfindPrice", fallbackMethod = "fallbackAfterRetry")
+//    @Retry(name = "RetryfindPrice", fallbackMethod = "fallbackAfterRetry")
     @Bulkhead(name="BulkheadfindPrice")
     @RateLimiter(name = "RatelimiterfindPrice")
     public ResponseEntity<FindPriceResponseDTO> findPrice(FindPriceRequestDTO body) {
 
-        FindPriceResponseDTO findPriceResponseDTO = null;
-        //llamada al usecase
-        if(findPriceResponseDTO==null){
+        FindPriceResponse response = findPriceUseCase.find(findPriceRequestMapper.toDomain(body));
+        if(response==null){
             throw new PriceNotFoundException("Price not found");
         }
-
-        return new ResponseEntity<>(HttpStatus.OK);
-
+        return ResponseEntity.ok(findPriceResponseMapper.toDto(response));
     }
 
     public String fallbackAfterRetry(Exception ex) {

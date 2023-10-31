@@ -2,7 +2,7 @@ package com.microservice.test.domain.entity;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Builder
 @Getter
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 public class FindPriceRequest {
 
-    private LocalDateTime applicationDate;
+    private OffsetDateTime applicationDate;
 
     private Integer productId;
 

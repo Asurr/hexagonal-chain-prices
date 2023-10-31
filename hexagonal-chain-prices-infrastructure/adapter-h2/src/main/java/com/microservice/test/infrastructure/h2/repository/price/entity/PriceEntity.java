@@ -20,7 +20,8 @@ public class PriceEntity implements Serializable {
     @Column(name = "price_id", columnDefinition = "integer", unique = true,nullable = false)
     @NotNull
     private Integer priceId;
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "brand_id", referencedColumnName = "brand_id")
     private BrandEntity brand;
     @Column(name = "start_date")
     private OffsetDateTime startDate;

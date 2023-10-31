@@ -9,7 +9,6 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.microservice.test</groupId>
     <artifactId>hexagonal-chain-prices-adapter-h2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>hexagonal-chain-prices-adapter-h2</name>
@@ -60,6 +59,12 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
