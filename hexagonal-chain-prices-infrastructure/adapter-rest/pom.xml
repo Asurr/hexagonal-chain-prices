@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>hexagonal-chain-prizes</artifactId>
+        <artifactId>hexagonal-chain-prices</artifactId>
         <groupId>com.microservice.test</groupId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
@@ -11,9 +11,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.microservice.test</groupId>
-    <artifactId>hexagonal-chain-prizes-adapter-rest</artifactId>
+    <artifactId>hexagonal-chain-prices-adapter-rest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hexagonal-chain-prizes-adapter-res</name>
+    <name>hexagonal-chain-prices-adapter-res</name>
     <description>spring-boot hexagonal microservice rest adapter</description>
 
 
@@ -25,12 +25,12 @@
     <dependencies>
         <dependency>
             <groupId>com.microservice.test</groupId>
-            <artifactId>hexagonal-chain-prizes-application</artifactId>
+            <artifactId>hexagonal-chain-prices-application</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.microservice.test</groupId>
-            <artifactId>hexagonal-chain-prizes-api-rest</artifactId>
+            <artifactId>hexagonal-chain-prices-api-rest</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -60,6 +60,10 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.5.12</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-spring-boot2</artifactId>
         </dependency>
     </dependencies>
 

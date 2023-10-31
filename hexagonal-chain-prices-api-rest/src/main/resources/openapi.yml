@@ -1,0 +1,97 @@
+openapi: 3.0.2
+info:
+  title: API-First Spring Boot hexagonal chain prices
+  version: 1.0.0-SNAPSHOT
+  description: API-First integration in a Spring Boot application!
+servers:
+  -
+    url: 'http://localhost:8080/v1'
+    description: LOCAL
+
+paths:
+  /hexagonal-chain-prices/findPrice:
+    post:
+      requestBody:
+        description: find prices
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FindPriceRequestDTO'
+        required: true
+      tags:
+        - prices
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FindPriceResponseDTO'
+          description: Successful operation
+        '400':
+          description: Bad request
+        '404':
+          description: price not found
+        '500':
+          description: Internal server error
+      operationId: findPrice
+      summary: Find price
+      description: Find price in the system
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    FindPriceRequestDTO:
+      required:
+        - application_date
+        - product_id
+        - brand_id
+      type: object
+      properties:
+        application_date:
+          format: date-time
+          type: string
+          example: '2019-07-16T16:55:42.000Z'
+          description: application date
+        product_id:
+          type: integer
+          example: 1
+          description: Product id
+        brand_id:
+          type: integer
+          example: 1
+          description: Brand id
+    FindPriceResponseDTO:
+      type: object
+      properties:
+        product_id:
+          type: integer
+          example: 1
+          description: Product id
+        brand_id:
+          type: integer
+          example: 1
+          description: Brand id
+        price_list:
+          type: integer
+          example: 1
+          description: Brand id
+        start_date:
+          format: date-time
+          type: string
+          example: '2019-07-16T16:55:42.000Z'
+          description: Start date
+        end_date:
+          format: date-time
+          type: string
+          example: '2019-07-16T16:55:42.000Z'
+          description: End date
+        price:
+          format: double
+          type: number
+          example: 30.50
+          description: Price
+tags:
+  -
+    name: prices
+    description: Operations with prices
