@@ -10,6 +10,7 @@ import com.microservice.test.infrastructure.rest.mapper.FindPriceRequestMapper;
 import com.microservice.test.infrastructure.rest.mapper.FindPriceResponseMapper;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -30,7 +31,7 @@ public class ProductPricesController implements HexagonalChainPricesApi {
     private final FindPriceResponseMapper findPriceResponseMapper;
 
     @Override
-//    @Retry(name = "RetryfindPrice", fallbackMethod = "fallbackAfterRetry")
+    @Retry(name = "RetryfindPrice", fallbackMethod = "fallbackAfterRetry")
     @Bulkhead(name="BulkheadfindPrice")
     @RateLimiter(name = "RatelimiterfindPrice")
     public ResponseEntity<FindPriceResponseDTO> findPrice(FindPriceRequestDTO body) {
