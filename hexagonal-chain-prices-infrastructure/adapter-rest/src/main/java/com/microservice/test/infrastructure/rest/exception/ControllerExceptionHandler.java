@@ -78,7 +78,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(PriceNotFoundException.class)
-    public ResponseEntity<ErrorMessageDTO> priceNotFoundHandler(PriceNotFoundException ex, WebRequest request) {
+    public ResponseEntity<ErrorMessageDTO> handlePriceNotFoundHandler(PriceNotFoundException ex, WebRequest request) {
         ErrorMessage errorMessage = ErrorMessage.builder()
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .errorTimestamp(OffsetDateTime.now())
@@ -92,7 +92,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorMessageDTO> globalExceptionHandler(Exception ex, WebRequest request) {
+    public ResponseEntity<ErrorMessageDTO> handleGlobalExceptionHandler(Exception ex, WebRequest request) {
         ErrorMessage errorMessage = ErrorMessage.builder()
                 .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .errorTimestamp(OffsetDateTime.now())
