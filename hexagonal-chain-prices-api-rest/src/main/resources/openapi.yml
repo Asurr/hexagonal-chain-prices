@@ -25,9 +25,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/FindPriceResponseDTO'
+                $ref: '#/components/schemas/FindPriceResponseDTO'
           description: Successful operation
         '400':
           description: Bad request
