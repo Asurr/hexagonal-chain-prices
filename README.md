@@ -26,6 +26,7 @@ Spring-boot REST microservice based hexagonal architecture project.
 ### REST adapter
 
 - [springdoc-openapi-ui](https://springdoc.org/)
+- [openapi-generator](https://github.com/OpenAPITools/openapi-generator)
 
 ### Integration test
 - [rest-assured](https://rest-assured.io/)
