@@ -16,15 +16,17 @@
 
 
     <properties>
+        <version>0.0.1-SNAPSHOT</version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <easy-random-core.version>5.0.0</easy-random-core.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.microservice.test</groupId>
-            <artifactId>hexagonal-chain-prices-application</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <artifactId>hexagonal-chain-prices-domain</artifactId>
+            <version>${version}</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -49,18 +51,6 @@
             <artifactId>flyway-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.13.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -68,7 +58,7 @@
         <dependency>
             <groupId>org.jeasy</groupId>
             <artifactId>easy-random-core</artifactId>
-            <version>5.0.0</version>
+            <version>${easy-random-core.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

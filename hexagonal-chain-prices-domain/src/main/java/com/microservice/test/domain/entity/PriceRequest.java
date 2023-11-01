@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class FindPriceRequest {
+public class PriceRequest {
 
     private OffsetDateTime applicationDate;
 

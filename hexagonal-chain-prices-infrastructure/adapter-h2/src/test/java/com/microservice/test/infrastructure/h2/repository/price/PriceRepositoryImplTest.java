@@ -1,11 +1,7 @@
 package com.microservice.test.infrastructure.h2.repository.price;
 
-import com.microservice.test.application.mapper.PriceToPriceResponseMapper;
-import com.microservice.test.application.usecase.FindPriceUseCaseImpl;
-import com.microservice.test.domain.entity.FindPriceRequest;
-import com.microservice.test.domain.entity.FindPriceResponse;
+import com.microservice.test.domain.entity.PriceRequest;
 import com.microservice.test.domain.entity.Price;
-import com.microservice.test.domain.repository.PriceRepository;
 import com.microservice.test.infrastructure.h2.repository.price.entity.PriceEntity;
 import com.microservice.test.infrastructure.h2.repository.price.mapper.PriceEntityMapper;
 import com.microservice.test.infrastructure.h2.repository.price.repository.PriceH2Repository;
@@ -48,13 +44,13 @@ class PriceRepositoryImplTest {
     void given_not_exist_price_reference_return_empty_list() {
 
         //GIVEN
-        FindPriceRequest findPriceRequest = easyRandom.nextObject(FindPriceRequest.class);
+        PriceRequest priceRequest = easyRandom.nextObject(PriceRequest.class);
 
         //MOCK
         when(this.priceH2Repository.findByFilter(ArgumentMatchers.any(),ArgumentMatchers.any(),ArgumentMatchers.any())).thenReturn(Collections.emptyList());
 
         //WHEN
-        List<Price> result = priceRepository.findByFilter(findPriceRequest);
+        List<Price> result = priceRepository.findByFilter(priceRequest);
 
         //THEN
         assertEquals(result, Collections.emptyList());
@@ -70,7 +66,7 @@ class PriceRepositoryImplTest {
     void given_exist_price_reference_return_empty_list() {
 
         //GIVEN
-        FindPriceRequest findPriceRequest = easyRandom.nextObject(FindPriceRequest.class);
+        PriceRequest priceRequest = easyRandom.nextObject(PriceRequest.class);
         List<PriceEntity> priceEntities = easyRandom.objects(PriceEntity.class,2).collect(Collectors.toList());
         List<Price> prices = easyRandom.objects(Price.class,2).collect(Collectors.toList());
 
@@ -79,7 +75,7 @@ class PriceRepositoryImplTest {
         when(this.priceEntityMapper.toDomain(ArgumentMatchers.any())).thenReturn(prices.get(0)).thenReturn(prices.get(1));
 
         //WHEN
-        List<Price> result = priceRepository.findByFilter(findPriceRequest);
+        List<Price> result = priceRepository.findByFilter(priceRequest);
 
         //THEN
         assertEquals(result, prices);

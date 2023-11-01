@@ -1,10 +1,10 @@
 package com.microservice.test.domain.usecase;
 
-import com.microservice.test.domain.entity.FindPriceRequest;
-import com.microservice.test.domain.entity.FindPriceResponse;
+import com.microservice.test.domain.entity.PriceRequest;
+import com.microservice.test.domain.entity.PriceResponse;
 
 public interface FindPriceUseCase {
 
-    FindPriceResponse find(FindPriceRequest findPriceRequest);
+    PriceResponse find(PriceRequest priceRequest);
 
 }

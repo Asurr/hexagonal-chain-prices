@@ -1,6 +1,5 @@
 package com.microservice.test.infrastructure.h2.repository.price.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.microservice.test.infrastructure.h2.repository.brand.entity.BrandEntity;
 import com.sun.istack.NotNull;
 import lombok.Getter;
@@ -40,4 +39,5 @@ public class PriceEntity implements Serializable {
     private Double price;
     @Column(name = "currency", columnDefinition = "varchar", length = 5, nullable = false)
     private String currency;
+
 }

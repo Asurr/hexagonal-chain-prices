@@ -86,8 +86,6 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
                 .description(request.getDescription(false))
                 .build();
 
-        ErrorMessageDTO errorDto = errorMessageMapper.toDto(errorMessage);
-
         return new ResponseEntity<>(errorMessageMapper.toDto(errorMessage), HttpStatus.NOT_FOUND);
     }
 
@@ -101,6 +99,17 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
 
         return new ResponseEntity<>(errorMessageMapper.toDto(errorMessage), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public ResponseEntity<ErrorMessageDTO> handleAfterRetries(Exception ex) {
+        ErrorMessage errorMessage = ErrorMessage.builder()
+                .statusCode(HttpStatus.SERVICE_UNAVAILABLE.value())
+                .errorTimestamp(OffsetDateTime.now())
+                .message(ex.getMessage())
+                .description("all retries have exhausted")
+                .build();
+
+        return new ResponseEntity<>(errorMessageMapper.toDto(errorMessage), HttpStatus.SERVICE_UNAVAILABLE);
     }
 
 }

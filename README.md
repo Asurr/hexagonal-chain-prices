@@ -45,7 +45,7 @@ mvn spring-boot:run -pl bootloader
 
 If application started correctly will provide the following end points:
 
-- `http://localhost:8081/hexagonal-chain-prices/findPrice`. POST http method that will receive json find price request.
+- `http://localhost:8081/hexagonal-chain-prices/search`. POST http method that will receive json find price request.
 ```shell
 Example:
 

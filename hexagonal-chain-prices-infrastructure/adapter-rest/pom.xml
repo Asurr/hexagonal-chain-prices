@@ -10,28 +10,29 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.microservice.test</groupId>
     <artifactId>hexagonal-chain-prices-adapter-rest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>hexagonal-chain-prices-adapter-res</name>
     <description>spring-boot hexagonal microservice rest adapter</description>
 
-
     <properties>
+        <version>0.0.1-SNAPSHOT</version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <resilience4j-spring-boot2.version>2.0.2</resilience4j-spring-boot2.version>
+        <easy-random-core.version>5.0.0</easy-random-core.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.microservice.test</groupId>
             <artifactId>hexagonal-chain-prices-application</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${version}</version>
         </dependency>
         <dependency>
             <groupId>com.microservice.test</groupId>
             <artifactId>hexagonal-chain-prices-api-rest</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -43,11 +44,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>spring-mock-mvc</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -56,18 +52,14 @@
             <artifactId>mapstruct</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.5.12</version>
-        </dependency>
-        <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-spring-boot2</artifactId>
+            <version>${resilience4j-spring-boot2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jeasy</groupId>
             <artifactId>easy-random-core</artifactId>
-            <version>5.0.0</version>
+            <version>${easy-random-core.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

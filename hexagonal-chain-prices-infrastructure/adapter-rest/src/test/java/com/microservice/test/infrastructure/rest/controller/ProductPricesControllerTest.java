@@ -1,10 +1,9 @@
 package com.microservice.test.infrastructure.rest.controller;
 
-import com.microservice.test.api.dto.v1.FindPriceRequestDTO;
-import com.microservice.test.api.dto.v1.FindPriceResponseDTO;
-import com.microservice.test.domain.entity.FindPriceRequest;
-import com.microservice.test.domain.entity.FindPriceResponse;
-import com.microservice.test.domain.entity.Price;
+import com.microservice.test.api.dto.v1.PriceRequestDTO;
+import com.microservice.test.api.dto.v1.PriceResponseDTO;
+import com.microservice.test.domain.entity.PriceRequest;
+import com.microservice.test.domain.entity.PriceResponse;
 import com.microservice.test.domain.exception.PriceNotFoundException;
 import com.microservice.test.domain.usecase.FindPriceUseCase;
 import com.microservice.test.infrastructure.rest.mapper.FindPriceRequestMapper;
@@ -17,10 +16,6 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -51,19 +46,19 @@ class ProductPricesControllerTest {
     void given_exist_price_reference_return_find_price_response() {
 
         //GIVEN
-        FindPriceRequestDTO findPriceRequestDTO = easyRandom.nextObject(FindPriceRequestDTO.class);
-        FindPriceRequest findPriceRequest = easyRandom.nextObject(FindPriceRequest.class);
-        FindPriceResponse findPriceResponse = easyRandom.nextObject(FindPriceResponse.class);
-        FindPriceResponseDTO findPriceResponseDTO = easyRandom.nextObject(FindPriceResponseDTO.class);
+        PriceRequestDTO findPriceRequestDTO = easyRandom.nextObject(PriceRequestDTO.class);
+        PriceRequest priceRequest = easyRandom.nextObject(PriceRequest.class);
+        PriceResponse priceResponse = easyRandom.nextObject(PriceResponse.class);
+        PriceResponseDTO findPriceResponseDTO = easyRandom.nextObject(PriceResponseDTO.class);
 
 
         //MOCK
-        when(this.findPriceRequestMapper.toDomain(ArgumentMatchers.any())).thenReturn(findPriceRequest);
-        when(this.findPriceUseCase.find(ArgumentMatchers.any())).thenReturn(findPriceResponse);
+        when(this.findPriceRequestMapper.toDomain(ArgumentMatchers.any())).thenReturn(priceRequest);
+        when(this.findPriceUseCase.find(ArgumentMatchers.any())).thenReturn(priceResponse);
         when(this.findPriceResponseMapper.toDto(ArgumentMatchers.any())).thenReturn(findPriceResponseDTO);
 
         //WHEN
-        FindPriceResponseDTO result = productPricesController.findPrice(findPriceRequestDTO).getBody();
+        PriceResponseDTO result = productPricesController.findPrice(findPriceRequestDTO).getBody();
 
         //THEN
         assertEquals(result, findPriceResponseDTO);
@@ -79,19 +74,16 @@ class ProductPricesControllerTest {
     void given_not_exist_price_reference_return_find_price_response() {
 
         //GIVEN
-        FindPriceRequestDTO findPriceRequestDTO = easyRandom.nextObject(FindPriceRequestDTO.class);
-        FindPriceRequest findPriceRequest = easyRandom.nextObject(FindPriceRequest.class);
+        PriceRequestDTO findPriceRequestDTO = easyRandom.nextObject(PriceRequestDTO.class);
+        PriceRequest priceRequest = easyRandom.nextObject(PriceRequest.class);
 
         //MOCK
-        when(this.findPriceRequestMapper.toDomain(ArgumentMatchers.any())).thenReturn(findPriceRequest);
+        when(this.findPriceRequestMapper.toDomain(ArgumentMatchers.any())).thenReturn(priceRequest);
         when(this.findPriceUseCase.find(ArgumentMatchers.any())).thenReturn(null);
 
         //THEN
         assertThrows(PriceNotFoundException.class,
-                ()->{
-                    productPricesController.findPrice(findPriceRequestDTO).getBody();
-                });
-
+                ()-> productPricesController.findPrice(findPriceRequestDTO).getBody());
 
     }
 

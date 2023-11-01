@@ -9,14 +9,14 @@ servers:
     description: LOCAL
 
 paths:
-  /hexagonal-chain-prices/findPrice:
+  /hexagonal-chain-prices/search:
     post:
       requestBody:
         description: find prices
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FindPriceRequestDTO'
+              $ref: '#/components/schemas/PriceRequestDTO'
         required: true
       tags:
         - prices
@@ -25,7 +25,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FindPriceResponseDTO'
+                $ref: '#/components/schemas/PriceResponseDTO'
           description: Successful operation
         '400':
           content:
@@ -75,7 +75,7 @@ paths:
       x-codegen-request-body-name: body
 components:
   schemas:
-    FindPriceRequestDTO:
+    PriceRequestDTO:
       required:
         - application_date
         - product_id
@@ -95,7 +95,7 @@ components:
           type: integer
           example: 1
           description: Brand id
-    FindPriceResponseDTO:
+    PriceResponseDTO:
       type: object
       properties:
         product_id:

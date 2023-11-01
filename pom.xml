@@ -35,7 +35,6 @@
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <spring-boot-starter-parent.version>2.6.3</spring-boot-starter-parent.version>
         <spring-boot-maven-plugin.version>2.4.5</spring-boot-maven-plugin.version>
-        <resilience4j-spring-boot2.version>2.0.2</resilience4j-spring-boot2.version>
     </properties>
 
     <dependencyManagement>
@@ -67,11 +66,6 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok-mapstruct-binding</artifactId>
                 <version>${lombok-mapstruct-binding.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.resilience4j</groupId>
-                <artifactId>resilience4j-spring-boot2</artifactId>
-                <version>${resilience4j-spring-boot2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

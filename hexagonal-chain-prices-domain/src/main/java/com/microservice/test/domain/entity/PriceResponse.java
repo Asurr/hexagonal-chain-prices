@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class FindPriceResponse {
+public class PriceResponse {
 
     private Integer productId;
 

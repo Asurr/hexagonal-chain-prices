@@ -1,6 +1,6 @@
 package com.microservice.test.springboot.config.cucumber;
 
-import com.microservice.test.api.dto.v1.FindPriceResponseDTO;
+import com.microservice.test.api.dto.v1.PriceResponseDTO;
 import com.microservice.test.springboot.config.SpringbootRestApplication;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.json.JSONObject;
@@ -11,17 +11,13 @@ import org.springframework.http.*;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-
 @CucumberContextConfiguration
 @SpringBootTest(classes = SpringbootRestApplication.class, webEnvironment = WebEnvironment.DEFINED_PORT)
 public class SpringIntegrationTest {
-    static ResponseEntity<FindPriceResponseDTO> latestResponse = null;
-
+    static ResponseEntity<PriceResponseDTO> latestResponse = null;
 
     @Autowired
     protected RestTemplate restTemplate;
-
 
      void executePost(String url,JSONObject jsonObj) {
         if (restTemplate == null) {
@@ -32,10 +28,10 @@ public class SpringIntegrationTest {
          HttpEntity<String> entity = new HttpEntity<>(jsonObj.toString(), headers);
         try{
             latestResponse = restTemplate
-                    .exchange(url, HttpMethod.POST, entity, FindPriceResponseDTO.class);
+                    .exchange(url, HttpMethod.POST, entity, PriceResponseDTO.class);
         }catch (HttpStatusCodeException e){
             latestResponse = ResponseEntity.status(e.getRawStatusCode()).headers(e.getResponseHeaders())
-                    .body(new FindPriceResponseDTO());
+                    .body(new PriceResponseDTO());
         }
     }
 

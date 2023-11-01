@@ -1,6 +1,6 @@
 package com.microservice.test.infrastructure.h2.repository.price;
 
-import com.microservice.test.domain.entity.FindPriceRequest;
+import com.microservice.test.domain.entity.PriceRequest;
 import com.microservice.test.domain.entity.Price;
 import com.microservice.test.domain.repository.PriceRepository;
 import com.microservice.test.infrastructure.h2.repository.price.entity.PriceEntity;
@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,9 +25,13 @@ public class PriceRepositoryImpl implements PriceRepository {
     PriceEntityMapper priceEntityMapper;
 
     @Override
-    public List<Price> findByFilter(FindPriceRequest findPriceRequest) {
-        log.debug("PriceRepositoryImpl::findByFilter");
-        return priceH2Repository.findByFilter(findPriceRequest.getApplicationDate(),findPriceRequest.getProductId(),findPriceRequest.getBrandId())
-                .stream().map(priceEntityMapper::toDomain).collect(Collectors.toList());
+    public List<Price> findByFilter(PriceRequest priceRequest) {
+        List<PriceEntity> prices = priceH2Repository.findByFilter(getApplicationDate(priceRequest), priceRequest.getProductId(), priceRequest.getBrandId());
+        log.debug("PriceRepositoryImpl::findByFilter prices size {}",prices.size());
+        return prices.stream().map(priceEntityMapper::toDomain).collect(Collectors.toList());
+    }
+
+    private Timestamp getApplicationDate(PriceRequest priceRequest) {
+        return Timestamp.valueOf(priceRequest.getApplicationDate().atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
     }
 }
