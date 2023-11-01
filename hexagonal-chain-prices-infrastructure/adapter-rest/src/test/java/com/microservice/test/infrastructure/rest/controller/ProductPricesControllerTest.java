@@ -6,8 +6,8 @@ import com.microservice.test.domain.entity.PriceRequest;
 import com.microservice.test.domain.entity.PriceResponse;
 import com.microservice.test.domain.exception.PriceNotFoundException;
 import com.microservice.test.domain.usecase.FindPriceUseCase;
-import com.microservice.test.infrastructure.rest.mapper.FindPriceRequestMapper;
-import com.microservice.test.infrastructure.rest.mapper.FindPriceResponseMapper;
+import com.microservice.test.infrastructure.rest.mapper.PriceRequestMapper;
+import com.microservice.test.infrastructure.rest.mapper.PriceResponseMapper;
 import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
 import org.junit.jupiter.api.Test;
@@ -30,10 +30,10 @@ class ProductPricesControllerTest {
     private FindPriceUseCase findPriceUseCase;
 
     @Mock
-    private FindPriceRequestMapper findPriceRequestMapper;
+    private PriceRequestMapper findPriceRequestMapper;
 
     @Mock
-    private FindPriceResponseMapper findPriceResponseMapper;
+    private PriceResponseMapper findPriceResponseMapper;
 
     EasyRandom easyRandom = new EasyRandom(getEasyRandomParameters());
 

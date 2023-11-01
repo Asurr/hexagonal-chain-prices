@@ -8,8 +8,8 @@ import com.microservice.test.domain.entity.PriceResponse;
 import com.microservice.test.domain.exception.PriceNotFoundException;
 import com.microservice.test.domain.usecase.FindPriceUseCase;
 import com.microservice.test.infrastructure.rest.exception.ControllerExceptionHandler;
-import com.microservice.test.infrastructure.rest.mapper.FindPriceRequestMapper;
-import com.microservice.test.infrastructure.rest.mapper.FindPriceResponseMapper;
+import com.microservice.test.infrastructure.rest.mapper.PriceRequestMapper;
+import com.microservice.test.infrastructure.rest.mapper.PriceResponseMapper;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
@@ -28,9 +28,9 @@ public class ProductPricesController implements HexagonalChainPricesApi {
 
     private final FindPriceUseCase findPriceUseCase;
 
-    private final FindPriceRequestMapper findPriceRequestMapper;
+    private final PriceRequestMapper findPriceRequestMapper;
 
-    private final FindPriceResponseMapper findPriceResponseMapper;
+    private final PriceResponseMapper findPriceResponseMapper;
 
     private final ControllerExceptionHandler controllerExceptionHandler;
 
@@ -40,7 +40,7 @@ public class ProductPricesController implements HexagonalChainPricesApi {
     @Bulkhead(name="BulkheadfindPrice")
     @RateLimiter(name = "RatelimiterfindPrice")
     public ResponseEntity<PriceResponseDTO> findPrice(PriceRequestDTO body) {
-
+        log.debug("ProductPricesController::findPrice brandId: {} productId: {} applicationDate {}", body.getBrandId(), body.getProductId(), body.getApplicationDate());
         PriceResponse response = findPriceUseCase.find(findPriceRequestMapper.toDomain(body));
         if(response==null){
             throw new PriceNotFoundException("Price not found");

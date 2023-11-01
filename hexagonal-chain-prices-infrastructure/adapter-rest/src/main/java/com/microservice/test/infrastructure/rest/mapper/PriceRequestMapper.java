@@ -5,7 +5,7 @@ import com.microservice.test.domain.entity.PriceRequest;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface FindPriceRequestMapper {
+public interface PriceRequestMapper {
 
     PriceRequest toDomain(PriceRequestDTO source);
 

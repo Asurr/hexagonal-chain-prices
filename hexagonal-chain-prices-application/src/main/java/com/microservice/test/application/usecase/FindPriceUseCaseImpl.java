@@ -24,7 +24,7 @@ public class FindPriceUseCaseImpl implements FindPriceUseCase {
     @Override
     public PriceResponse find(PriceRequest priceRequest) {
         Comparator<Price> cmp = Comparator.comparing(Price::getPriority);
-        log.info("FindPriceUseCaseImpl::find brandId: {} productId: {} applicationDate {}", priceRequest.getBrandId(), priceRequest.getProductId(), priceRequest.getApplicationDate());
+        log.debug("FindPriceUseCaseImpl::find brandId: {} productId: {} applicationDate {}", priceRequest.getBrandId(), priceRequest.getProductId(), priceRequest.getApplicationDate());
         return priceToPriceResponseMapper.toPriceResponse(priceRepository.findByFilter(priceRequest).
                 stream().max(cmp).orElse(null));
     }

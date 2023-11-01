@@ -5,7 +5,7 @@ import com.microservice.test.domain.entity.PriceResponse;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface FindPriceResponseMapper {
+public interface PriceResponseMapper {
 
     PriceResponseDTO toDto(PriceResponse source);
     
