@@ -47,7 +47,7 @@ After creating all artifacts you can run the project with the following command:
 mvn spring-boot:run -pl bootloader
 ```
 
-If application started correctly will provide the following end points:
+If application started correctly will provide the following end point:
 
 - `http://localhost:8081/hexagonal-chain-prices/search`. POST http method that will receive json find price request.
 ```shell
@@ -58,6 +58,16 @@ Example:
     "product_id":35455,
     "brand_id": 1
 }
+
+cURL
+
+curl --location 'http://localhost:8081/hexagonal-chain-prices/search' \
+--header 'Content-Type: application/json' \
+--data '{
+"application_date": "2020-06-15T10:00:00.000Z",
+"product_id":35455,
+"brand_id": 1
+}'
 ```
 - `http://localhost:8081/v3/api-docs`. OpenAPI schema auto-generated from the swagger annotation provided by the `springdoc` dependency.
 - `http://localhost:8081/swagger-ui.html`. Swagger interface based on the OpenAPI auto-generated schema that helps you to test resource endpoints.
