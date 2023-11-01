@@ -15,6 +15,7 @@ Spring-boot REST microservice based hexagonal architecture project.
 - [Lombok](https://projectlombok.org/)
 - [MapStruct](https://mapstruct.org/) 
 - [Spring-boot](https://quarkus.io/)
+- [Resilience4j](https://resilience4j.readme.io/docs)
 
 ### H2 adapter
 
@@ -24,7 +25,9 @@ Spring-boot REST microservice based hexagonal architecture project.
 
 ### REST adapter
 
-- [springdoc-openapi-ui](https://springdoc.org/) 
+- [springdoc-openapi-ui](https://springdoc.org/)
+
+### Integration test
 - [rest-assured](https://rest-assured.io/)
 - [cucumber](https://cucumber.io/)
 
